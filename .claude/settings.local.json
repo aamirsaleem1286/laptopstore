@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -v \"//\\\\|message\\\\|comment\\\\|'admin'\\\\|'staff'\\\\|'manager'\\\\|'paid'\\\\|'customer'\\\\|'wholesale_customer'\")"
+    ]
+  }
+}
