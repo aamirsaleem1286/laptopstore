@@ -1,4 +1,6 @@
 import { NextResponse } from 'next/server';
+
+export const dynamic = 'force-dynamic';
 import { dbConnect, query, execute } from '@/lib/db';
 import { getAuthUser } from '@/lib/auth';
 import { v4 as uuidv4 } from 'uuid';

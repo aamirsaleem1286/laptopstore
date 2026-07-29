@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { HiOutlineEye, HiOutlineMagnifyingGlass, HiOutlineRefresh } from 'react-icons/hi';
+import { HiOutlineEye, HiOutlineSearch, HiOutlineRefresh } from 'react-icons/hi';
 import DataTable from '@/components/ui/DataTable';
 
 const statusColors = {
@@ -108,7 +108,7 @@ export default function AdminOrdersPage() {
         </div>
 
         <form onSubmit={handleSearch} className="relative flex-1 max-w-xs ml-auto">
-          <HiOutlineMagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <HiOutlineSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           <input
             type="text"
             value={search}

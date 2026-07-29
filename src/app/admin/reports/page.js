@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { HiOutlineArrowTrendingUp, HiOutlineCube, HiOutlineUsers, HiOutlineShoppingCart } from 'react-icons/hi';
+import { HiOutlineChartBar, HiOutlineCube, HiOutlineUsers, HiOutlineShoppingCart } from 'react-icons/hi';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
 
 const formatCurrency = (val) =>
@@ -64,7 +64,7 @@ export default function AdminReportsPage() {
               <p className="text-sm font-medium text-gray-500">Total Revenue</p>
               <p className="text-2xl font-bold mt-1">{formatCurrency(reportData.totalRevenue || 0)}</p>
             </div>
-            <HiOutlineArrowTrendingUp className="w-8 h-8 text-blue-500" />
+            <HiOutlineTrendingUp className="w-8 h-8 text-blue-500" />
           </div>
         </div>
         <div className="bg-white p-5 rounded-xl border">

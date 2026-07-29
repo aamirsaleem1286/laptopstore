@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { HiOutlineCube, HiOutlineShoppingCart, HiOutlineUsers, HiOutlineExclamationTriangle, HiOutlineArrowTrendingUp, HiOutlineTrash } from 'react-icons/hi';
+import { HiOutlineCube, HiOutlineShoppingCart, HiOutlineUsers, HiOutlineExclamation, HiOutlineChartBar, HiOutlineTrash } from 'react-icons/hi';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import DataTable from '@/components/ui/DataTable';
 
@@ -49,7 +49,7 @@ export default function AdminDashboardPage() {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: 'Total Revenue', value: formatCurrency(stats?.totalRevenue || 0), icon: HiOutlineArrowTrendingUp, color: 'bg-green-50 text-green-600' },
+          { label: 'Total Revenue', value: formatCurrency(stats?.totalRevenue || 0), icon: HiOutlineTrendingUp, color: 'bg-green-50 text-green-600' },
           { label: 'Total Orders', value: stats?.totalOrders || 0, icon: HiOutlineShoppingCart, color: 'bg-blue-50 text-blue-600' },
           { label: 'Total Products', value: stats?.totalProducts || 0, icon: HiOutlineCube, color: 'bg-purple-50 text-purple-600' },
           { label: 'Total Customers', value: stats?.totalCustomers || 0, icon: HiOutlineUsers, color: 'bg-orange-50 text-orange-600' },
@@ -73,7 +73,7 @@ export default function AdminDashboardPage() {
                 <p className="text-sm font-medium">Low Stock Alert</p>
                 <p className="text-2xl font-bold mt-1">{lowStockProducts.length}</p>
               </div>
-              <HiOutlineExclamationTriangle className="w-8 h-8" />
+              <HiOutlineExclamation className="w-8 h-8" />
             </div>
             <p className="text-xs mt-2">{lowStockProducts.length} product{lowStockProducts.length !== 1 ? 's' : ''} need restocking</p>
           </Link>

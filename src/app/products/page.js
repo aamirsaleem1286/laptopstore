@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { Suspense, useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 import ProductGrid from '@/components/product/ProductGrid';
 import ProductFilters from '@/components/product/ProductFilters';
 import Pagination from '@/components/ui/Pagination';
 import { HiOutlineViewGrid, HiOutlineViewList, HiOutlineFilter } from 'react-icons/hi';
 
-export default function ProductsPage() {
+function ProductsContent() {
   const searchParams = useSearchParams();
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState({ page: 1, pages: 1, total: 0 });
@@ -49,7 +49,6 @@ export default function ProductsPage() {
       }
     });
 
-    // Apply URL search params
     const search = searchParams.get('q');
     if (search) params.set('q', search);
     const brand = searchParams.get('brand');
@@ -76,7 +75,6 @@ export default function ProductsPage() {
     fetchProducts(1);
   }, [filters, sort, order]);
 
-  // Apply URL params on mount
   useEffect(() => {
     const brand = searchParams.get('brand');
     if (brand) {
@@ -110,14 +108,12 @@ export default function ProductsPage() {
       </div>
 
       <div className="flex gap-6">
-        {/* Filters sidebar */}
         <aside className="hidden md:block w-64 flex-shrink-0">
           <div className="sticky top-24">
             <ProductFilters filters={filters} setFilters={setFilters} />
           </div>
         </aside>
 
-        {/* Mobile filters */}
         {showMobileFilters && (
           <div className="fixed inset-0 z-50 md:hidden">
             <div className="absolute inset-0 bg-black/50" onClick={() => setShowMobileFilters(false)} />
@@ -127,7 +123,6 @@ export default function ProductsPage() {
           </div>
         )}
 
-        {/* Product grid */}
         <div className="flex-1">
           <p className="text-sm text-gray-500 mb-4">{pagination.total} product{pagination.total !== 1 ? 's' : ''} found</p>
           {loading ? (
@@ -155,5 +150,35 @@ export default function ProductsPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={
+      <div className="space-y-6">
+        <div className="h-8 bg-gray-100 rounded w-48 animate-pulse" />
+        <div className="flex gap-6">
+          <div className="hidden md:block w-64 space-y-4">
+            <div className="h-96 bg-gray-100 rounded animate-pulse" />
+          </div>
+          <div className="flex-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="bg-white border rounded-lg p-4 animate-pulse">
+                  <div className="aspect-square bg-gray-100 rounded mb-4" />
+                  <div className="h-4 bg-gray-100 rounded w-1/3 mb-2" />
+                  <div className="h-5 bg-gray-100 rounded w-2/3 mb-3" />
+                  <div className="h-4 bg-gray-100 rounded w-1/4 mb-2" />
+                  <div className="h-10 bg-gray-100 rounded" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    }>
+      <ProductsContent />
+    </Suspense>
   );
 }

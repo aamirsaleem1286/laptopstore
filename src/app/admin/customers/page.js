@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { HiOutlineMagnifyingGlass, HiOutlineCheckCircle, HiOutlineXCircle, HiOutlineBan, HiOutlineRefresh } from 'react-icons/hi';
+import { HiOutlineSearch, HiOutlineCheckCircle, HiOutlineXCircle, HiOutlineBan, HiOutlineRefresh } from 'react-icons/hi';
 import DataTable from '@/components/ui/DataTable';
 
 export default function AdminCustomersPage() {
@@ -117,7 +117,7 @@ export default function AdminCustomersPage() {
 
       {/* Search */}
       <form onSubmit={handleSearch} className="relative max-w-md">
-        <HiOutlineMagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+        <HiOutlineSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
         <input
           type="text"
           value={search}

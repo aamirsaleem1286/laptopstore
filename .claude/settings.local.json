@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(grep -v \"//\\\\|message\\\\|comment\\\\|'admin'\\\\|'staff'\\\\|'manager'\\\\|'paid'\\\\|'customer'\\\\|'wholesale_customer'\")"
+      "Bash(grep -v \"//\\\\|message\\\\|comment\\\\|'admin'\\\\|'staff'\\\\|'manager'\\\\|'paid'\\\\|'customer'\\\\|'wholesale_customer'\")",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\Aamir\\\\Desktop\\\\laptop wholesale estore\\\\src\\\\app\\\\api\" -Recurse -Filter \"route.js\" | ForEach-Object { Write-Host $_.FullName.Replace\\('C:\\\\Users\\\\Aamir\\\\Desktop\\\\laptop wholesale estore\\\\', ''\\) })",
+      "Bash(npx next *)"
     ]
   }
 }

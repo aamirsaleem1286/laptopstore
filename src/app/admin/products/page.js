@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { HiOutlinePlus, HiOutlineTrash, HiOutlinePencil, HiOutlineDocumentDuplicate, HiOutlineArrowDownTray, HiOutlineMagnifyingGlass } from 'react-icons/hi';
+import { HiOutlinePlus, HiOutlineTrash, HiOutlinePencil, HiOutlineDocumentDuplicate, HiOutlineArrowDownTray, HiOutlineSearch } from 'react-icons/hi';
 import DataTable from '@/components/ui/DataTable';
 import Modal from '@/components/ui/Modal';
 
@@ -122,7 +122,7 @@ export default function AdminProductsPage() {
 
       <div className="flex gap-4 mb-4">
         <div className="relative flex-1 max-w-md">
-          <HiOutlineMagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <HiOutlineSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
           <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search products..." className="w-full pl-10 pr-4 py-2 border rounded-lg" />
         </div>
       </div>
