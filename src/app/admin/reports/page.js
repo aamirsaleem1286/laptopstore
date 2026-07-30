@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { HiOutlineChartBar, HiOutlineCube, HiOutlineUsers, HiOutlineShoppingCart } from 'react-icons/hi';
+import { HiOutlineTrendingUp, HiOutlineCube, HiOutlineUsers, HiOutlineShoppingCart } from 'react-icons/hi';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
 
 const formatCurrency = (val) =>
@@ -107,6 +107,7 @@ export default function AdminReportsPage() {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="date" tick={{ fontSize: 12 }} />
                 <YAxis tick={{ fontSize: 12 }} tickFormatter={(val) => `₨${(val / 1000).toFixed(0)}k`} />
+                <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 12 }} />
                 <Tooltip
                   formatter={(value) => [formatCurrency(value), 'Revenue']}
                   labelFormatter={(label) => new Date(label).toLocaleDateString()}

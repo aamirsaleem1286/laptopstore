@@ -54,7 +54,7 @@ export default function DataTable({ columns, data, onSort, sortField, sortOrder,
               </tr>
             ) : (
               data.map((row, i) => (
-                <tr key={row._id || i} className="hover:bg-gray-50">
+                <tr key={row.id || row._id || i} className="hover:bg-gray-50">
                   {columns.map((col) => (
                     <td key={col.key} className="px-4 py-3">
                       {col.render ? col.render(row) : row[col.key]}

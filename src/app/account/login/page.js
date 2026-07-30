@@ -19,8 +19,13 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      await login(form.email, form.password);
-      router.push('/account/dashboard');
+      const data = await login(form.email, form.password);
+      // Redirect admin users to admin panel, others to customer dashboard
+      if (data.user && ['admin', 'manager', 'staff'].includes(data.user.role)) {
+        router.push('/admin/dashboard');
+      } else {
+        router.push('/account/dashboard');
+      }
     } catch (err) {
       setError(err.message);
     } finally {

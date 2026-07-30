@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { HiOutlineHome, HiOutlineCube, HiOutlineShoppingCart, HiOutlineUsers, HiOutlineTag, HiOutlineTicket, HiOutlineChartBar, HiOutlineCog, HiOutlineShieldCheck, HiOutlineArrowLeft } from 'react-icons/hi';
 import { useAuth } from '@/context/AuthContext';
 
@@ -21,14 +21,8 @@ const navItems = [
 
 export default function AdminLayout({ children }) {
   const { user, loading: authLoading } = useAuth();
-  const router = useRouter();
+  const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [pathname, setPathname] = useState('/admin/dashboard');
-
-  // Update pathname on mount and route changes
-  if (typeof window !== 'undefined') {
-    setPathname(window.location.pathname);
-  }
 
   if (authLoading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   if (!user || !['admin', 'manager', 'staff'].includes(user.role)) {

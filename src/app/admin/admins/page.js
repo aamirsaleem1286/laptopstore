@@ -54,10 +54,10 @@ export default function AdminAdminsPage() {
       return;
     }
 
-    const url = editing ? `/api/admin/admins?id=${editing._id}` : '/api/admin/admins';
+    const url = editing ? `/api/admin/admins?id=${editing.id || editing._id}` : '/api/admin/admins';
     const method = editing ? 'PUT' : 'POST';
     const payload = editing
-      ? { _id: editing._id, ...formData, password: formData.password || undefined }
+      ? { _id: editing.id || editing._id, ...formData, password: formData.password || undefined }
       : formData;
 
     try {

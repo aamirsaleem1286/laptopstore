@@ -1,8 +1,6 @@
-'use client';
-
+"use client"
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { HiOutlinePlus, HiOutlineTrash, HiOutlinePencil, HiOutlineDocumentDuplicate, HiOutlineArrowDownTray, HiOutlineSearch } from 'react-icons/hi';
+import { HiOutlinePlus, HiOutlineTrash, HiOutlinePencil, HiOutlineSearch } from 'react-icons/hi';
 import DataTable from '@/components/ui/DataTable';
 import Modal from '@/components/ui/Modal';
 
@@ -61,7 +59,7 @@ export default function AdminProductsPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = editingProduct ? `/api/admin/products/${editingProduct._id}` : '/api/admin/products';
+    const url = editingProduct ? `/api/admin/products/${editingProduct.id}` : '/api/admin/products';
     const method = editingProduct ? 'PUT' : 'POST';
     try {
       const res = await fetch(url, {
@@ -94,7 +92,7 @@ export default function AdminProductsPage() {
     setFormData({
       name: product.name || '',
       brand: product.brand || '',
-      category: product.category?._id || '',
+      category: product.categoryId || '',
       description: product.description || '',
       retailPrice: product.retailPrice || 0,
       wholesalePrice: product.wholesalePrice || 0,
@@ -132,14 +130,14 @@ export default function AdminProductsPage() {
           { key: 'image', label: '', render: (row) => row.images?.[0] ? <img src={`/images/products/${row.images[0]}`} alt="" className="w-12 h-12 object-contain" /> : null },
           { key: 'name', label: 'Product' },
           { key: 'brand', label: 'Brand' },
-          { key: 'category', label: 'Category', render: (row) => row.category?.name || '-' },
+          { key: 'category', label: 'Category', render: (row) => row.categoryName || (row.category?.name) || '-' },
           { key: 'retailPrice', label: 'Retail', render: (row) => `Rs. ${row.retailPrice.toLocaleString()}` },
           { key: 'wholesalePrice', label: 'Wholesale', render: (row) => row.wholesalePrice ? `Rs. ${row.wholesalePrice.toLocaleString()}` : '-' },
           { key: 'stock', label: 'Stock', render: (row) => <span className={row.stock <= (row.lowStockThreshold || 5) ? 'text-red-600 font-medium' : ''}>{row.stock}</span> },
           { key: 'actions', label: 'Actions', render: (row) => (
             <div className="flex items-center gap-2">
               <button onClick={() => handleEdit(row)} className="p-1 hover:bg-gray-100 rounded" title="Edit"><HiOutlinePencil className="w-4 h-4" /></button>
-              <button onClick={() => handleDelete(row._id)} className="p-1 hover:bg-red-50 rounded text-red-600" title="Delete"><HiOutlineTrash className="w-4 h-4" /></button>
+              <button onClick={() => handleDelete(row.id)} className="p-1 hover:bg-red-50 rounded text-red-600" title="Delete"><HiOutlineTrash className="w-4 h-4" /></button>
             </div>
           )},
         ]}
@@ -156,7 +154,7 @@ export default function AdminProductsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="md:col-span-2"><label className="block text-sm font-medium mb-1">Product Name *</label><input type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} required className="w-full px-3 py-2 border rounded-md" /></div>
             <div><label className="block text-sm font-medium mb-1">Brand *</label><input type="text" value={formData.brand} onChange={(e) => setFormData({...formData, brand: e.target.value})} required className="w-full px-3 py-2 border rounded-md" /></div>
-            <div><label className="block text-sm font-medium mb-1">Category *</label><select value={formData.category} onChange={(e) => setFormData({...formData, category: e.target.value})} required className="w-full px-3 py-2 border rounded-md"><option value="">Select</option>{categories.map(c => <option key={c._id} value={c._id}>{c.name}</option>)}</select></div>
+            <div><label className="block text-sm font-medium mb-1">Category *</label><select value={formData.category} onChange={(e) => setFormData({...formData, category: e.target.value})} required className="w-full px-3 py-2 border rounded-md"><option value="">Select</option>{categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}</select></div>
             <div><label className="block text-sm font-medium mb-1">Condition</label><select value={formData.condition} onChange={(e) => setFormData({...formData, condition: e.target.value})} className="w-full px-3 py-2 border rounded-md"><option value="new">New</option><option value="used">Used</option><option value="refurbished">Refurbished</option></select></div>
             <div className="md:col-span-2"><label className="block text-sm font-medium mb-1">Description</label><textarea value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} rows={3} className="w-full px-3 py-2 border rounded-md" /></div>
           </div>

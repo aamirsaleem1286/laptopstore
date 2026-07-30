@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { HiOutlineCube, HiOutlineShoppingCart, HiOutlineUsers, HiOutlineExclamation, HiOutlineChartBar, HiOutlineTrash } from 'react-icons/hi';
+import { HiOutlineCube, HiOutlineShoppingCart, HiOutlineUsers, HiOutlineExclamation, HiOutlineTrendingUp } from 'react-icons/hi';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import DataTable from '@/components/ui/DataTable';
 

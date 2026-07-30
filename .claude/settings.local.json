@@ -3,7 +3,13 @@
     "allow": [
       "Bash(grep -v \"//\\\\|message\\\\|comment\\\\|'admin'\\\\|'staff'\\\\|'manager'\\\\|'paid'\\\\|'customer'\\\\|'wholesale_customer'\")",
       "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\Aamir\\\\Desktop\\\\laptop wholesale estore\\\\src\\\\app\\\\api\" -Recurse -Filter \"route.js\" | ForEach-Object { Write-Host $_.FullName.Replace\\('C:\\\\Users\\\\Aamir\\\\Desktop\\\\laptop wholesale estore\\\\', ''\\) })",
-      "Bash(npx next *)"
+      "Bash(npx next *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:3000/api/admin/products)",
+      "Bash(curl -s http://localhost:3001/api/admin/products)",
+      "Bash(curl -s \"http://localhost:3001/admin/login\")",
+      "Bash(curl *)",
+      "Bash(node -e ' *)"
     ]
   }
 }

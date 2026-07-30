@@ -1,23 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getAuthUser, isAdminOrStaff } from '@/lib/auth';
 
-const publicPaths = [
-  '/',
-  '/products',
-  '/about',
-  '/contact',
-  '/faq',
-  '/warranty',
-  '/login',
-  '/register',
-  '/api/auth',
-  '/api/products',
-  '/api/search',
-  '/api/contact',
-  '/api/newsletter',
-  '/api/upload',
-];
-
 const adminPaths = ['/admin', '/api/admin'];
 
 export async function middleware(request) {
@@ -51,16 +34,18 @@ export async function middleware(request) {
   const isAccountPath = pathname.startsWith('/account');
   const isAuthPage = pathname === '/account/login' || pathname === '/account/register';
   const isAdminPath = adminPaths.some((p) => pathname.startsWith(p));
+  const isAdminLoginPage = pathname === '/admin/login';
+  const isUnifiedLoginPage = pathname === '/login' || pathname === '/register';
 
   if (isAccountPath && !user && !isAuthPage) {
-    const loginUrl = new URL('/account/login', request.url);
+    const loginUrl = new URL('/login', request.url);
     loginUrl.searchParams.set('redirect', pathname);
     return NextResponse.redirect(loginUrl);
   }
 
-  if (isAdminPath) {
+  if (isAdminPath && !isAdminLoginPage) {
     if (!user) {
-      return NextResponse.redirect(new URL('/admin/login', request.url));
+      return NextResponse.redirect(new URL('/login', request.url));
     }
     if (!isAdminOrStaff(user.role)) {
       return NextResponse.redirect(new URL('/', request.url));

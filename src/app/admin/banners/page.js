@@ -38,9 +38,9 @@ export default function AdminBannersPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = editing ? `/api/admin/banners?id=${editing._id}` : '/api/admin/banners';
+    const url = editing ? `/api/admin/banners?id=${editing.id || editing._id}` : '/api/admin/banners';
     const method = editing ? 'PUT' : 'POST';
-    const payload = editing ? { _id: editing._id, ...formData } : formData;
+    const payload = editing ? { _id: editing.id || editing._id, ...formData } : formData;
 
     try {
       const res = await fetch(url, {
@@ -103,7 +103,7 @@ export default function AdminBannersPage() {
           { key: 'actions', label: 'Actions', render: (row) => (
             <div className="flex items-center gap-2">
               <button onClick={() => handleEdit(row)} className="p-1 hover:bg-gray-100 rounded" title="Edit"><HiOutlinePencil className="w-4 h-4" /></button>
-              <button onClick={() => handleDelete(row._id)} className="p-1 hover:bg-red-50 rounded text-red-600" title="Delete"><HiOutlineTrash className="w-4 h-4" /></button>
+              <button onClick={() => handleDelete(row.id || row._id)} className="p-1 hover:bg-red-50 rounded text-red-600" title="Delete"><HiOutlineTrash className="w-4 h-4" /></button>
             </div>
           )},
         ]}

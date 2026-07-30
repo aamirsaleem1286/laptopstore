@@ -31,9 +31,9 @@ export default function AdminCategoriesPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = editing ? `/api/admin/categories?id=${editing._id}` : '/api/admin/categories';
+    const url = editing ? `/api/admin/categories?id=${editing.id || editing._id}` : '/api/admin/categories';
     const method = editing ? 'PUT' : 'POST';
-    const payload = editing ? { _id: editing._id, ...formData } : formData;
+    const payload = editing ? { _id: editing.id || editing._id, ...formData } : formData;
 
     try {
       const res = await fetch(url, {
@@ -103,7 +103,7 @@ export default function AdminCategoriesPage() {
           </thead>
           <tbody className="divide-y">
             {filteredCategories.map((cat) => (
-              <tr key={cat._id} className="hover:bg-gray-50">
+              <tr key={cat.id || cat._id} className="hover:bg-gray-50">
                 <td className="px-4 py-3 font-medium">{cat.name}</td>
                 <td className="px-4 py-3 text-gray-500">{cat.slug}</td>
                 <td className="px-4 py-3 text-gray-500">{cat.parent?.name || '-'}</td>
@@ -115,7 +115,7 @@ export default function AdminCategoriesPage() {
                 <td className="px-4 py-3">
                   <div className="flex gap-2">
                     <button onClick={() => handleEdit(cat)} className="p-1 hover:bg-gray-100 rounded" title="Edit"><HiOutlinePencil className="w-4 h-4" /></button>
-                    <button onClick={() => handleDelete(cat._id)} className="p-1 hover:bg-red-50 rounded text-red-600" title="Delete"><HiOutlineTrash className="w-4 h-4" /></button>
+                    <button onClick={() => handleDelete(cat.id || cat._id)} className="p-1 hover:bg-red-50 rounded text-red-600" title="Delete"><HiOutlineTrash className="w-4 h-4" /></button>
                   </div>
                 </td>
               </tr>
@@ -135,7 +135,7 @@ export default function AdminCategoriesPage() {
               <div><label className="block text-sm font-medium mb-1">Parent Category</label>
                 <select value={formData.parent} onChange={(e) => setFormData({...formData, parent: e.target.value})} className="w-full px-3 py-2 border rounded-md">
                   <option value="">None</option>
-                  {categories.map(c => <option key={c._id} value={c._id}>{c.name}</option>)}
+                  {categories.map(c => <option key={c.id || c._id} value={c.id || c._id}>{c.name}</option>)}
                 </select>
               </div>
               <div className="flex items-center gap-2"><input type="checkbox" checked={formData.isActive} onChange={(e) => setFormData({...formData, isActive: e.target.checked})} className="rounded" /><label className="text-sm font-medium">Active</label></div>
